@@ -1,6 +1,6 @@
 # NPCScheduler
 An algorithm for Time-Based NPC's in 3D games. Created for use in the Unity Engine, however could easily be adapted for other workflows.
-![GIF](https://giphy.com/gifs/DaqVg3JfzvwQXxDc2t)
+![](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXQwcWJ1bXoydmh4bGh0M2dpdHlpcXBmbzl0ZDF0dG1icDdxZDh0YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/DaqVg3JfzvwQXxDc2t/giphy.gif)
 
 ##How Does it Work?
 The algorithm takes in a few variables, such as: current time, the time the pathing should start, the time the pathing should finish, as well as the points to follow.
