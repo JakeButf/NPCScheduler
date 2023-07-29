@@ -12,6 +12,7 @@ public class ScheduledNPC : MonoBehaviour
     StartEndTimes currentStartEndTime;
     [SerializeField] List<StartEndTimes> startEndTime = new List<StartEndTimes>(); //The time that the npc starts the path and the time the NPC ends the path.
     bool shouldSpawn = false;
+    int closestNPCPoint = 0;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class ScheduledNPC : MonoBehaviour
             return;
         FloorNPC();
         this.transform.position = CalculateNPCPosition(currentPath, currentStartEndTime, GM.currentTime);
+        RotateNPC();
     }
 
     void FloorNPC()
@@ -40,7 +42,6 @@ public class ScheduledNPC : MonoBehaviour
     void CheckIfNPCShouldSpawn()
     {
         //Check if NPC should be undergoing a path on scene load
-
         for (int i = 0; i < startEndTime.Count; i++)
         {
             if (startEndTime[i].startEndTimes[0] <= GM.currentTime && startEndTime[i].startEndTimes[1] >= GM.currentTime)
@@ -74,10 +75,20 @@ public class ScheduledNPC : MonoBehaviour
                 closestPoint = i;
             }
         }
+        closestNPCPoint = closestPoint;
         //Get value between 0-1 representing how far along the line the player should be (0 being point a, 1 being point b)
         float pointOnLine = (timeDividedLength - (dividedLength * (closestPoint + 1))) / ((dividedLength * (closestPoint + 2)) - (dividedLength * (closestPoint + 1)));
         //Return Linear Interpolation of Point A and Point B against time t (pointOnLine)
         return Vector3.Lerp(path.GetPathPoints()[closestPoint].position, path.GetPathPoints()[closestPoint + 1].position, pointOnLine);
+    }
+
+    void RotateNPC()
+    {
+        float x = this.transform.rotation.x;
+        float z = this.transform.rotation.z;
+        this.transform.LookAt(currentPath.GetPathPoints()[closestNPCPoint + 1].position);
+
+        this.transform.eulerAngles = new Vector3(x, this.transform.eulerAngles.y, z);
     }
 }
 
