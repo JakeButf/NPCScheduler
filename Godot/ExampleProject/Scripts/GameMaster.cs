@@ -7,15 +7,12 @@ public partial class GameMaster : Node
 	/// Export Variables
 	/// </summary>
 	[ExportGroup("In-Game Time Settings")]
-	[Export]
-	private bool timePassing = true;
-	[Export]
-	private float timeSpeed = 1.0f;
+    [Export] private bool timePassing = true;
+    [Export] private float timeSpeed = 1.0f;
+
 	[ExportGroup("Readonly In-Game Time Values")]
-	[Export]
-	private float currentTime = 0f;
-	[Export]
-	private string readableCurrentTime = "";
+    [Export] public float currentTime = 0f;
+    [Export] private string readableCurrentTime = "";
 	/// <summary>
 	/// Private Variables
 	/// </summary>

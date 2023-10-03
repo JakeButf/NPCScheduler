@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cd1jh8lnhy0me"]
+[gd_scene load_steps=14 format=3 uid="uid://cd1jh8lnhy0me"]
 
 [ext_resource type="Material" uid="uid://tqm4uc5k2yop" path="res://Mats/mat_test00.tres" id="1_i6rfh"]
 [ext_resource type="Script" path="res://Scripts/GameMaster.cs" id="1_vkmhw"]
 [ext_resource type="Environment" uid="uid://c4ax0ch6un5s6" path="res://new_environment.tres" id="2_fb3fm"]
+[ext_resource type="Script" path="res://Scripts/ScheduledNPC.cs" id="4_eqedk"]
 [ext_resource type="Script" path="res://Scripts/NPCPathVisualizer.cs" id="4_m1nyt"]
+[ext_resource type="Script" path="res://Scripts/NPCPath.cs" id="5_g314c"]
 [ext_resource type="Script" path="res://Scripts/lib/J_Debug.cs" id="5_xp18s"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_vqp85"]
@@ -57,8 +59,13 @@ current = true
 
 [node name="NPCParent" type="Node" parent="."]
 
-[node name="NPC" type="Node3D" parent="NPCParent"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.221321, 3.80001, -0.264725)
+[node name="NPC" type="Node3D" parent="NPCParent" node_paths=PackedStringArray("GM", "paths")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.73174)
+script = ExtResource("4_eqedk")
+GM = NodePath("../../Managers/GameMaster")
+paths = [NodePath("../Path")]
+startTimes = PackedFloat32Array(0)
+endTimes = PackedFloat32Array(20)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="NPCParent/NPC"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034935, 1.65348, 0.00450802)
@@ -71,18 +78,27 @@ skeleton = NodePath("../CollisionShape3D")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NPCParent/NPC/RigidBody3D"]
 shape = SubResource("CapsuleShape3D_075jd")
 
-[node name="NPCPath" type="Node" parent="NPCParent" node_paths=PackedStringArray("pointsParent")]
+[node name="Path" type="Node" parent="NPCParent"]
+script = ExtResource("5_g314c")
+
+[node name="PathVisualizer" type="Node" parent="NPCParent/Path" node_paths=PackedStringArray("pointsParent")]
 script = ExtResource("4_m1nyt")
-pointsParent = NodePath("PathPoints")
+pointsParent = NodePath("../PathPoints")
 recalculateLines = true
 
-[node name="J_Debug" type="Node" parent="NPCParent/NPCPath"]
+[node name="J_Debug" type="Node" parent="NPCParent/Path/PathVisualizer"]
 script = ExtResource("5_xp18s")
 
-[node name="PathPoints" type="Node3D" parent="NPCParent/NPCPath"]
+[node name="PathPoints" type="Node3D" parent="NPCParent/Path"]
 
-[node name="Node3D" type="Node3D" parent="NPCParent/NPCPath/PathPoints"]
+[node name="Node3D" type="Node3D" parent="NPCParent/Path/PathPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.73174)
 
-[node name="Node3D2" type="Node3D" parent="NPCParent/NPCPath/PathPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.35293, 0, -15.7489)
+[node name="Node3D2" type="Node3D" parent="NPCParent/Path/PathPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.35202, 0, -15.7489)
+
+[node name="Node3D3" type="Node3D" parent="NPCParent/Path/PathPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.30913, 0, -20.0718)
+
+[node name="Node3D4" type="Node3D" parent="NPCParent/Path/PathPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6969, 0, -18.9875)

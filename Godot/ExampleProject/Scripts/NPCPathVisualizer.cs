@@ -5,10 +5,10 @@ using System.Collections.Generic;
 [Tool]
 public partial class NPCPathVisualizer : Node
 {
-	[Export]
-	public Node3D pointsParent;
-	[Export]
-	public bool recalculateLines;
+
+    [Export] public Node3D pointsParent;
+
+    [Export] public bool recalculateLines;
 
 	J_Debug debug;
 
@@ -40,7 +40,7 @@ public partial class NPCPathVisualizer : Node
 			//Draw Points
             foreach (Node3D node in pointsParent.GetChildren())
             {
-                meshCache.Add(debug.PointRenderer(node.GlobalPosition, .5f, Color.Color8(255, 255, 255, 255)));
+                meshCache.Add(debug.PointRenderer(node.Position, .5f, Color.Color8(255, 255, 255, 255)));
             }
 			//Draw Lines
 			for(int i = 0; i < pointsParent.GetChildren().Count; i++)
@@ -49,7 +49,7 @@ public partial class NPCPathVisualizer : Node
 				{
 					Node3D p1 = pointsParent.GetChildren()[i - 1] as Node3D;
                     Node3D p2 = pointsParent.GetChildren()[i] as Node3D;
-                    meshCache.Add(debug.LineRender(p1.GlobalPosition, p2.GlobalPosition, Color.Color8(255, 255, 255, 255)));
+                    meshCache.Add(debug.LineRender(p1.Position, p2.Position, Color.Color8(255, 255, 255, 255)));
                 }
 					
 			}
