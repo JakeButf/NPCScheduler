@@ -29,11 +29,11 @@ This is a piecewise function that defines the point q for all possible segments 
 
 ## How Can I Implement This Into My Own Project?
 
-###Unity
+### Unity
 
 To implement this into a Unity project, you simply need to feed the code a changing time variable (which is referenced in ScheduledNPC.cs as GM.currentTime) as well as an NPCPath instance that contains 3-Dimensional points in your scene.
 
-###Godot
+### Godot
 
 The Godot section of this repository is newer a bit more adaptable than the Unity section. If there is any confusion in hierarchy you can refer to the image below or the example project included in the repository.
 
