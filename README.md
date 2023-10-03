@@ -35,14 +35,13 @@ To implement this into a Unity project, you simply need to feed the code a chang
 
 ### Godot
 
-The Godot section of this repository is newer a bit more adaptable than the Unity section. If there is any confusion in hierarchy you can refer to the image below or the example project included in the repository.
+The Godot section of this repository is newer a bit more adaptable than the Unity section. If there is any confusion in hierarchy you can refer to the example project included in the repository.
 
 To begin, just create a plain Node for our NPC. There's two branches of this Node in Godot, the NPC and it's path. I will first explain the path.
 
 Firstly, you will want to create a child of our NPC node and attach the NPCPathVisualizer.cs script to it. Then create a child node of this node, as it will store all of the NPC path points. This parent node will need to be assigned in NPCPathVisualizer.cs.
 
-*Note: this section is specifically for being able to visualize the NPC path which is more complicated than unity. If you just case about functionality you can skip this and comment it out of the code.
-
+*Note: this section is specifically for being able to visualize the NPC path which is more complicated than unity. If you just case about functionality you can skip this and comment it out of the code.*
 Next, you want to make use of the J_Debug.cs node found [here](https://github.com/JakeButf/Godot3Debugger). This node needs to be a child of your NPC Path node. This will allow NPCPathVisualizer.cs to draw reference lines of the NPC's path.
 
 Then you can simply create and place Node3D children of the NPCPath node we assigned earlier to map out your path.
