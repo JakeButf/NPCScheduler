@@ -1,0 +1,17 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://c4ax0ch6un5s6"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c2yfy"]
+
+[sub_resource type="Sky" id="Sky_ri5vr"]
+sky_material = SubResource("ProceduralSkyMaterial_c2yfy")
+process_mode = 1
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_ri5vr")
+ambient_light_color = Color(0.305882, 0.666667, 1, 1)
+ambient_light_energy = 6.03
+ssr_enabled = true
+ssao_enabled = true
+glow_enabled = true
+glow_bloom = 1.0

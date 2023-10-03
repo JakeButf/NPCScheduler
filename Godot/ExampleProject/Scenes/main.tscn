@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=3 uid="uid://cd1jh8lnhy0me"]
+
+[ext_resource type="Material" uid="uid://tqm4uc5k2yop" path="res://Mats/mat_test00.tres" id="1_i6rfh"]
+[ext_resource type="Script" path="res://Scripts/GameMaster.cs" id="1_vkmhw"]
+[ext_resource type="Environment" uid="uid://c4ax0ch6un5s6" path="res://new_environment.tres" id="2_fb3fm"]
+[ext_resource type="Script" path="res://Scripts/NPCPathVisualizer.cs" id="4_m1nyt"]
+[ext_resource type="Script" path="res://Scripts/lib/J_Debug.cs" id="5_xp18s"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_vqp85"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_m60ym"]
+size = Vector2(50, 50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6ivki"]
+data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ljyaj"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q3ufw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_075jd"]
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.221321, -1.90735e-06, -0.264725)
+
+[node name="Managers" type="Node" parent="."]
+
+[node name="GameMaster" type="Node" parent="Managers"]
+script = ExtResource("1_vkmhw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Managers"]
+environment = ExtResource("2_fb3fm")
+camera_attributes = SubResource("CameraAttributesPractical_vqp85")
+
+[node name="SceneSetup" type="Node" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="SceneSetup"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.221321, -1.90735e-06, -0.264725)
+material_override = ExtResource("1_i6rfh")
+mesh = SubResource("PlaneMesh_m60ym")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SceneSetup/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SceneSetup/Floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_6ivki")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SceneSetup"]
+transform = Transform3D(1, 0, 0, 0, 0.616211, 0.787581, 0, -0.787581, 0.616211, -0.221321, 11.4186, -0.264725)
+light_energy = 4.346
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965286, 0.261195, 0, -0.261195, 0.965286, 0, 9.49801, 17.2347)
+environment = ExtResource("2_fb3fm")
+attributes = SubResource("CameraAttributesPractical_ljyaj")
+current = true
+
+[node name="NPCParent" type="Node" parent="."]
+
+[node name="NPC" type="Node3D" parent="NPCParent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.221321, 3.80001, -0.264725)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="NPCParent/NPC"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034935, 1.65348, 0.00450802)
+lock_rotation = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NPCParent/NPC/RigidBody3D"]
+mesh = SubResource("CapsuleMesh_q3ufw")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPCParent/NPC/RigidBody3D"]
+shape = SubResource("CapsuleShape3D_075jd")
+
+[node name="NPCPath" type="Node" parent="NPCParent" node_paths=PackedStringArray("pointsParent")]
+script = ExtResource("4_m1nyt")
+pointsParent = NodePath("PathPoints")
+recalculateLines = true
+
+[node name="J_Debug" type="Node" parent="NPCParent/NPCPath"]
+script = ExtResource("5_xp18s")
+
+[node name="PathPoints" type="Node3D" parent="NPCParent/NPCPath"]
+
+[node name="Node3D" type="Node3D" parent="NPCParent/NPCPath/PathPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.73174)
+
+[node name="Node3D2" type="Node3D" parent="NPCParent/NPCPath/PathPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.35293, 0, -15.7489)
