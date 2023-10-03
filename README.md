@@ -1,7 +1,9 @@
 # NPCScheduler
 An algorithm for Time-Based NPC's in 3D games. Created for use in the Unity Engine and later adapted to Godot 4.1, however could easily be adapted for other workflows.
 
-![](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXQwcWJ1bXoydmh4bGh0M2dpdHlpcXBmbzl0ZDF0dG1icDdxZDh0YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/DaqVg3JfzvwQXxDc2t/giphy.gif)
+| ![Unity](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXQwcWJ1bXoydmh4bGh0M2dpdHlpcXBmbzl0ZDF0dG1icDdxZDh0YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/DaqVg3JfzvwQXxDc2t/giphy.gif) | ![Godot](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExam54a2Q2Z3JwbHo0MXJpaTE3ZWcxaWxuempsM3g0MWlxdm4zdDdwbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KQnlvt9pBPA0lsblBS/giphy.gif) |
+|:--:|:--:|
+| *Unity* | *Godot* |
 
 ## How Does it Work?
 The algorithm takes in a few variables, such as: current time, the time the pathing should start, the time the pathing should finish, as well as the points to follow.
@@ -42,6 +44,7 @@ To begin, just create a plain Node for our NPC. There's two branches of this Nod
 Firstly, you will want to create a child of our NPC node and attach the NPCPathVisualizer.cs script to it. Then create a child node of this node, as it will store all of the NPC path points. This parent node will need to be assigned in NPCPathVisualizer.cs.
 
 *Note: this section is specifically for being able to visualize the NPC path which is more complicated than unity. If you just case about functionality you can skip this and comment it out of the code.*
+
 Next, you want to make use of the J_Debug.cs node found [here](https://github.com/JakeButf/Godot3Debugger). This node needs to be a child of your NPC Path node. This will allow NPCPathVisualizer.cs to draw reference lines of the NPC's path.
 
 Then you can simply create and place Node3D children of the NPCPath node we assigned earlier to map out your path.
